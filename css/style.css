@@ -235,20 +235,19 @@ body {
   position: relative;
   background-color: var(--color-bg-secondary);
   border: 1px solid var(--color-border);
-  border-radius: 4px;
+  border-radius: 6px;
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
   width: 100%;
+  height: auto;
 }
 
 .photo-frame img {
   width: 100%;
   height: auto;
-  max-height: 85vh;
-  object-fit: contain;
   display: block;
+  object-fit: cover;
   transition: transform var(--transition-slow), opacity var(--transition-medium);
-  background-color: var(--color-bg-secondary);
 }
 
 .photo-frame:hover img {
@@ -751,10 +750,10 @@ body {
   }
 
   .photo-frame img {
-    max-height: 52vh;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    object-fit: cover !important;
   }
 
   .layout-variant-a {
