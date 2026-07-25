@@ -320,34 +320,30 @@ body {
 }
 
 .layout-variant-b .photo-block-primary {
-  width: 70%;
+  width: 75%;
   margin-left: 0;
-}
-
-.layout-variant-b .photo-block-primary .photo-frame {
-  aspect-ratio: 3 / 4;
+  position: relative;
+  z-index: 1;
 }
 
 .layout-variant-b .photo-block-secondary {
-  width: 55%;
+  width: 60%;
   margin-left: auto;
-  margin-top: -30%;
+  margin-top: -2.5rem;
   position: relative;
   z-index: 2;
 }
 
 .layout-variant-b .photo-block-secondary .photo-frame {
-  aspect-ratio: 4 / 5;
-  border: 1px solid rgba(214, 194, 161, 0.3);
+  border: 1px solid rgba(214, 194, 161, 0.35);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
 }
 
 .layout-variant-b .photo-block-tertiary {
   width: 100%;
-  margin-top: 3rem;
-}
-
-.layout-variant-b .photo-block-tertiary .photo-frame {
-  aspect-ratio: 16 / 9;
+  margin-top: 1.5rem;
+  position: relative;
+  z-index: 3;
 }
 
 /* Variant C: Asymmetrical Grid */
@@ -754,11 +750,26 @@ body {
     z-index: 1 !important;
   }
 
-  .layout-variant-b .photo-block-primary,
-  .layout-variant-b .photo-block-secondary {
-    width: 100% !important;
-    margin-top: 1.5rem !important;
+  .layout-variant-b .photo-block-primary {
+    width: 85% !important;
     margin-left: 0 !important;
+    position: relative;
+    z-index: 1;
+  }
+
+  .layout-variant-b .photo-block-secondary {
+    width: 75% !important;
+    margin-left: auto !important;
+    margin-top: -2rem !important;
+    position: relative;
+    z-index: 2;
+  }
+
+  .layout-variant-b .photo-block-tertiary {
+    width: 100% !important;
+    margin-top: 1.25rem !important;
+    position: relative;
+    z-index: 3;
   }
 }
 
