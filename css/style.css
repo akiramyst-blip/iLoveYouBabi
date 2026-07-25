@@ -731,50 +731,66 @@ body {
   background: linear-gradient(to bottom, var(--color-bg), #000000);
 }
 
-/* Responsive Mobile Enhancements & Photo Auto-Adjust */
+/* Responsive Mobile Enhancements — 100% Clean Mobile Display */
 @media (max-width: 768px) {
   .chapters-container {
-    padding: 2rem 0.85rem;
-    gap: 3.5rem;
+    padding: 1.5rem 1rem;
+    gap: 3rem;
+  }
+
+  /* Reset all negative margins on mobile to prevent any photo overlap */
+  .layout-variant-a .photo-block-main,
+  .layout-variant-a .photo-grid-sub,
+  .layout-variant-a .photo-block-main + .photo-block-main,
+  .layout-variant-b .photo-block-primary,
+  .layout-variant-b .photo-block-secondary,
+  .layout-variant-b .photo-block-tertiary {
+    margin-top: 0 !important;
+    position: relative !important;
+    top: auto !important;
   }
 
   .photo-frame img {
-    max-height: 55vh;
+    max-height: 52vh;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .layout-variant-a {
+    gap: 1.5rem;
+    width: 100%;
   }
 
   .layout-variant-a .photo-block-main {
-    width: 82% !important;
-    max-width: 310px !important;
+    width: 90% !important;
+    max-width: 330px !important;
     margin: 0 auto !important;
   }
 
   .layout-variant-a .photo-grid-sub {
-    width: 88% !important;
-    max-width: 340px !important;
-    margin: -1.75rem auto 0 auto !important;
-    gap: 0.75rem !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1rem !important;
+    width: 90% !important;
+    max-width: 330px !important;
+    margin: 0 auto !important;
   }
 
-  .layout-variant-b .photo-block-primary {
-    width: 82% !important;
-    margin-left: 0 !important;
-    position: relative;
-    z-index: 1;
+  .layout-variant-b {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+    align-items: center !important;
   }
 
-  .layout-variant-b .photo-block-secondary {
-    width: 72% !important;
-    margin-left: auto !important;
-    margin-top: -1.85rem !important;
-    position: relative;
-    z-index: 2;
-  }
-
+  .layout-variant-b .photo-block-primary,
+  .layout-variant-b .photo-block-secondary,
   .layout-variant-b .photo-block-tertiary {
-    width: 95% !important;
-    margin: 1rem auto 0 auto !important;
-    position: relative;
-    z-index: 3;
+    width: 90% !important;
+    max-width: 330px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 }
 
