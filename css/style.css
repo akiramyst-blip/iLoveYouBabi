@@ -44,7 +44,7 @@ body {
   background-color: var(--color-bg);
   color: var(--color-text-primary);
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: clip;
   position: relative;
 }
 
@@ -395,6 +395,14 @@ body {
   max-width: 840px;
   margin: 0 auto;
   width: 100%;
+  align-items: start;
+}
+
+.layout-variant-d .sticky-photo {
+  position: sticky;
+  top: 2rem;
+  z-index: 10;
+  align-self: start;
 }
 
 @media (min-width: 768px) {

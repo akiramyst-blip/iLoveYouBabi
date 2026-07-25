@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ==========================================
-     4. Top-to-Bottom Typewriter Logic
+     4. Typewriter Logic (Single Paragraph)
      ========================================== */
   function typeParagraph(pElement, callback) {
     const fullText = pElement.getAttribute('data-full-text');
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     let charIndex = 0;
-    const speed = 20; // 20ms per character for smooth top-to-bottom flow
+    const speed = 18; // 18ms per char for continuous typing flow
 
     function typeChar() {
       if (charIndex < fullText.length) {
@@ -99,36 +99,60 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ==========================================
-     5. Intersection Observer for Scroll Reveals
+     5. Continuous One-Go Typewriter Sequence
      ========================================== */
-  const revealElements = document.querySelectorAll('.reveal-item');
+  const letterSection = document.getElementById('letter-section');
+  const letterParagraphEls = document.querySelectorAll('.letter-paragraph');
+  let hasStartedLetterTypewriter = false;
+
+  function startContinuousTypewriter(index = 0) {
+    if (index >= letterParagraphEls.length) return;
+
+    const pEl = letterParagraphEls[index];
+    pEl.classList.add('is-visible');
+
+    typeParagraph(pEl, () => {
+      setTimeout(() => {
+        startContinuousTypewriter(index + 1);
+      }, 150);
+    });
+  }
+
+  if (letterSection) {
+    const letterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !hasStartedLetterTypewriter) {
+          hasStartedLetterTypewriter = true;
+          startContinuousTypewriter(0);
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    letterObserver.observe(letterSection);
+  }
+
+  /* ==========================================
+     6. General Reveal Observer (Hero, Photos, Beats)
+     ========================================== */
+  const revealElements = document.querySelectorAll('.reveal-item:not(.letter-paragraph)');
 
   const revealObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('is-visible');
-
-        // If it's a letter paragraph, run top-to-bottom typewriter effect
-        if (entry.target.classList.contains('letter-paragraph')) {
-          if (!entry.target.getAttribute('data-has-typed')) {
-            entry.target.setAttribute('data-has-typed', 'true');
-            typeParagraph(entry.target);
-          }
-        }
-
         observer.unobserve(entry.target);
       }
     });
   }, {
-    root: null,
-    rootMargin: '0px 0px -40px 0px',
     threshold: 0.1
   });
 
   revealElements.forEach(el => revealObserver.observe(el));
 
   /* ==========================================
-     6. Hero Scroll-linked Fade Out
+     7. Hero Scroll-linked Fade Out
      ========================================== */
   const heroSection = document.getElementById('hero');
 
@@ -157,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ==========================================
-     7. Final Section Word-by-Word Sequence
+     8. Final Section Word-by-Word Sequence
      ========================================== */
   const revealExperience = document.getElementById('reveal-experience');
   const words = document.querySelectorAll('.reveal-word');
@@ -177,14 +201,12 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
           }
 
-          // Trigger word by word with subtle delays
           words.forEach((word, index) => {
             setTimeout(() => {
               word.classList.add('is-visible');
-            }, index * 600); // 600ms delay per word for dramatic pacing
+            }, index * 600);
           });
 
-          // Trigger final signature closing after all words
           setTimeout(() => {
             if (finalClosing) finalClosing.classList.add('is-visible');
           }, words.length * 600 + 400);
