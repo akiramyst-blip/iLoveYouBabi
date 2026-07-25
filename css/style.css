@@ -533,16 +533,17 @@ body {
 
 /* Journal Paragraph Styling */
 .letter-paragraph {
-  font-size: clamp(1.05rem, 2.5vw, 1.2rem);
-  line-height: 1.85;
+  font-family: 'Caveat', cursive, var(--font-sans);
+  font-size: clamp(1.4rem, 3.8vw, 1.75rem);
+  line-height: 1.6;
   color: var(--color-text-primary);
-  font-weight: 300;
-  letter-spacing: 0.01em;
+  font-weight: 400;
+  letter-spacing: 0.02em;
 }
 
 .letter-paragraph .typed-text {
   color: var(--color-text-primary);
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .letter-paragraph .typewriter-cursor {
@@ -553,6 +554,80 @@ body {
   margin-left: 2px;
   vertical-align: middle;
   animation: blinkCursor 0.8s infinite;
+}
+
+/* Floating Minion Component */
+.floating-minion {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  width: clamp(65px, 12vw, 95px);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(214, 194, 161, 0.25);
+  opacity: 0.88;
+  transition: opacity var(--transition-medium);
+}
+
+.floating-minion img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.minion-hero {
+  top: 15%;
+  right: 5%;
+  animation: floatMinionSlow 5s ease-in-out infinite alternate;
+}
+
+.minion-ch1 {
+  top: 6%;
+  left: 2%;
+  animation: floatMinionRotate 6s ease-in-out infinite alternate;
+}
+
+.minion-ch2 {
+  top: 4%;
+  right: 3%;
+  animation: floatMinionSlow 5.5s ease-in-out infinite alternate;
+}
+
+.minion-ch3 {
+  top: 8%;
+  left: 3%;
+  animation: floatMinionRotate 6.5s ease-in-out infinite alternate;
+}
+
+.minion-ch4 {
+  top: 5%;
+  right: 4%;
+  animation: floatMinionSlow 7s ease-in-out infinite alternate;
+}
+
+.minion-transition {
+  top: 12%;
+  left: 6%;
+  animation: floatMinionRotate 5.8s ease-in-out infinite alternate;
+}
+
+@keyframes floatMinionSlow {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-16px) rotate(4deg);
+  }
+}
+
+@keyframes floatMinionRotate {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-14px) rotate(-5deg);
+  }
 }
 
 @keyframes blinkCursor {
