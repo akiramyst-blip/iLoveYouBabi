@@ -1,0 +1,666 @@
+/* ==========================================
+   Design System & Custom Properties
+   ========================================== */
+:root {
+  --color-bg: #0D0D0D;
+  --color-bg-secondary: #171717;
+  --color-text-primary: #F7F5F2;
+  --color-text-muted: #9B9B9B;
+  --color-accent: #D6C2A1;
+  --color-border: #2A2A2A;
+
+  --font-serif: 'Allura', cursive;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --transition-slow: 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-medium: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 0.3s ease;
+  
+  --max-width-content: 840px;
+  --max-width-wide: 1200px;
+}
+
+/* ==========================================
+   Base Reset & Global Styles
+   ========================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Selection */
+::selection {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+/* Typography Helpers */
+.font-allura {
+  font-family: var(--font-serif);
+  font-weight: 400;
+}
+
+/* Base Reveal Animation Classes */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(24px) scale(0.98);
+  filter: blur(6px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow), filter var(--transition-slow);
+  will-change: opacity, transform, filter;
+}
+
+.reveal-item.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-item {
+    transform: none !important;
+    filter: none !important;
+    transition: opacity 0.4s ease !important;
+  }
+  
+  .hero-heart {
+    animation: none !important;
+  }
+  
+  .scroll-line-inner {
+    animation: none !important;
+  }
+}
+
+/* ==========================================
+   Section 1: Hero Section
+   ========================================== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  will-change: opacity, transform;
+}
+
+.hero-heart-container {
+  margin-bottom: 2rem;
+}
+
+.hero-heart {
+  font-size: 4rem;
+  color: var(--color-accent);
+  display: inline-block;
+  user-select: none;
+  animation: floatHeart 4s ease-in-out infinite;
+  text-shadow: 0 0 20px rgba(214, 194, 161, 0.2);
+}
+
+@keyframes floatHeart {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.05);
+  }
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 3vw, 1.25rem);
+  font-weight: 300;
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 2.5rem;
+}
+
+.hero-prompt {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-accent);
+  opacity: 0.8;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: var(--color-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-line-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color-accent);
+  animation: scrollDown 2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes scrollDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* ==========================================
+   Photo Chapters Container
+   ========================================== */
+.chapters-container {
+  padding: 4rem 1.5rem;
+  max-width: var(--max-width-wide);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8rem;
+}
+
+.chapter {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.chapter-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.chapter-tag {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--color-accent);
+  margin-bottom: 0.5rem;
+}
+
+.chapter-title {
+  font-size: clamp(1.75rem, 5vw, 2.75rem);
+  font-weight: 300;
+  color: var(--color-text-primary);
+  letter-spacing: -0.01em;
+}
+
+/* Photo Card Frame Component */
+.photo-frame {
+  position: relative;
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--transition-slow), opacity var(--transition-medium);
+  background-color: var(--color-bg-secondary);
+}
+
+.photo-frame:hover img {
+  transform: scale(1.03);
+}
+
+.photo-caption {
+  font-size: 0.875rem;
+  font-style: italic;
+  color: var(--color-text-muted);
+  margin-top: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+/* Photo Image Fallback styling (if image not loaded) */
+.photo-frame.is-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+  background: var(--color-bg-secondary);
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px dashed var(--color-border);
+}
+
+/* ==========================================
+   Layout Variants (A, B, C, D)
+   ========================================== */
+
+/* Variant A: Full-Screen / Large Portrait Focus */
+.layout-variant-a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+.layout-variant-a .photo-block-main {
+  width: 100%;
+  max-width: 600px;
+}
+
+.layout-variant-a .photo-frame {
+  aspect-ratio: 3 / 4;
+}
+
+.layout-variant-a .photo-grid-sub {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.layout-variant-a .photo-grid-sub .photo-frame {
+  aspect-ratio: 4 / 5;
+}
+
+/* Variant B: Overlapping Dual Portrait Cards */
+.layout-variant-b {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 2rem 0;
+}
+
+.layout-variant-b .photo-block-primary {
+  width: 70%;
+  margin-left: 0;
+}
+
+.layout-variant-b .photo-block-primary .photo-frame {
+  aspect-ratio: 3 / 4;
+}
+
+.layout-variant-b .photo-block-secondary {
+  width: 55%;
+  margin-left: auto;
+  margin-top: -30%;
+  position: relative;
+  z-index: 2;
+}
+
+.layout-variant-b .photo-block-secondary .photo-frame {
+  aspect-ratio: 4 / 5;
+  border: 1px solid rgba(214, 194, 161, 0.3);
+}
+
+.layout-variant-b .photo-block-tertiary {
+  width: 100%;
+  margin-top: 3rem;
+}
+
+.layout-variant-b .photo-block-tertiary .photo-frame {
+  aspect-ratio: 16 / 9;
+}
+
+/* Variant C: Asymmetrical Grid */
+.layout-variant-c {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  max-width: 840px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .layout-variant-c {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
+}
+
+.layout-variant-c .photo-block-col1 {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.layout-variant-c .photo-block-col2 {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.layout-variant-c .photo-frame-tall {
+  aspect-ratio: 3 / 4;
+}
+
+.layout-variant-c .photo-frame-square {
+  aspect-ratio: 1 / 1;
+}
+
+/* Variant D: Sticky Image with Scrolling Captions */
+.layout-variant-d {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  max-width: 840px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .layout-variant-d {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+
+  .layout-variant-d .sticky-photo {
+    position: sticky;
+    top: 4rem;
+  }
+}
+
+.layout-variant-d .photo-frame {
+  aspect-ratio: 3 / 4;
+}
+
+.layout-variant-d .scrolling-captions {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 1rem 0;
+}
+
+.layout-variant-d .caption-card {
+  background: var(--color-bg-secondary);
+  border-left: 2px solid var(--color-accent);
+  padding: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+
+.layout-variant-d .caption-card p {
+  font-size: 0.95rem;
+  color: var(--color-text-primary);
+  font-style: italic;
+}
+
+/* ==========================================
+   Section 3.6: Transition Beat
+   ========================================== */
+.transition-beat {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 1.5rem;
+  position: relative;
+}
+
+.transition-beat-line {
+  height: 60px;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--color-accent), transparent);
+  margin-bottom: 2.5rem;
+}
+
+.transition-beat-text {
+  font-size: clamp(1.25rem, 4vw, 1.85rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-text-muted);
+  max-width: 540px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+/* ==========================================
+   Section 4: Letter Component System
+   ========================================== */
+.letter-section {
+  max-width: var(--max-width-content);
+  margin: 0 auto;
+  padding: 6rem 1.5rem 8rem;
+}
+
+.letter-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.letter-subtitle {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--color-accent);
+  margin-bottom: 0.5rem;
+}
+
+.letter-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 300;
+  color: var(--color-text-primary);
+}
+
+.letter-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+/* Part Dividers */
+.letter-part-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 3rem 0;
+  opacity: 0.5;
+}
+
+.letter-part-divider::before,
+.letter-part-divider::after {
+  content: '';
+  height: 1px;
+  width: 60px;
+  background-color: var(--color-border);
+}
+
+.letter-part-tag {
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+/* Journal Paragraph Styling */
+.letter-paragraph {
+  font-size: clamp(1.05rem, 2.5vw, 1.2rem);
+  line-height: 1.85;
+  color: var(--color-text-primary);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+.letter-paragraph .typed-text {
+  color: var(--color-text-primary);
+  font-weight: 300;
+}
+
+.letter-paragraph .typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background-color: var(--color-accent);
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: blinkCursor 0.8s infinite;
+}
+
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ==========================================
+   Section 5: Final Section & Silence Stretch
+   ========================================== */
+.final-section {
+  position: relative;
+  background-color: var(--color-bg);
+}
+
+/* Long Silent Dark Stretch */
+.silence-stretch {
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Word Reveal Experience */
+.reveal-experience {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 1.5rem;
+  gap: 3rem;
+}
+
+.word-by-word-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 1.25rem;
+  max-width: 600px;
+  margin-bottom: 3rem;
+}
+
+.reveal-word {
+  font-size: clamp(2rem, 7vw, 3.75rem);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.reveal-word.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-word.accent-word {
+  color: var(--color-accent);
+}
+
+.final-closing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+  transition-delay: 0.4s;
+}
+
+.final-closing.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.final-heart {
+  font-size: 3rem;
+  color: var(--color-accent);
+  user-select: none;
+}
+
+.final-title {
+  font-size: clamp(3rem, 10vw, 5.5rem);
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.final-signature {
+  font-size: clamp(1rem, 3vw, 1.25rem);
+  color: var(--color-text-muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* Fade to Black Spacer at End */
+.fade-to-black-end {
+  height: 40vh;
+  background: linear-gradient(to bottom, var(--color-bg), #000000);
+}
+
+/* Responsive Desktop Enhancements */
+@media (min-width: 1024px) {
+  .chapters-container {
+    gap: 12rem;
+  }
+
+  .chapter-header {
+    margin-bottom: 4rem;
+  }
+
+  .letter-section {
+    padding: 10rem 1.5rem;
+  }
+
+  .letter-content {
+    gap: 4.5rem;
+  }
+}
