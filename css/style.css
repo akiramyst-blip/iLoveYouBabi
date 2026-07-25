@@ -399,13 +399,12 @@ body {
 }
 
 .layout-variant-d .sticky-photo {
-  position: sticky;
-  top: 2rem;
-  z-index: 10;
-  align-self: start;
+  position: relative;
+  top: auto;
+  z-index: 1;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
   .layout-variant-d {
     grid-template-columns: 1fr 1fr;
     align-items: start;
@@ -414,6 +413,8 @@ body {
   .layout-variant-d .sticky-photo {
     position: sticky;
     top: 4rem;
+    z-index: 10;
+    align-self: start;
   }
 }
 
@@ -745,6 +746,12 @@ body {
   .layout-variant-c .photo-frame-square,
   .layout-variant-d .photo-frame {
     aspect-ratio: auto !important;
+  }
+
+  .layout-variant-d .sticky-photo {
+    position: relative !important;
+    top: auto !important;
+    z-index: 1 !important;
   }
 
   .layout-variant-b .photo-block-primary,
