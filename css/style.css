@@ -238,12 +238,14 @@ body {
   border-radius: 4px;
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  width: 100%;
 }
 
 .photo-frame img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  max-height: 85vh;
+  object-fit: contain;
   display: block;
   transition: transform var(--transition-slow), opacity var(--transition-medium);
   background-color: var(--color-bg-secondary);
@@ -644,6 +646,30 @@ body {
 .fade-to-black-end {
   height: 40vh;
   background: linear-gradient(to bottom, var(--color-bg), #000000);
+}
+
+/* Responsive Mobile Enhancements & Photo Auto-Adjust */
+@media (max-width: 768px) {
+  .chapters-container {
+    padding: 2rem 1rem;
+    gap: 4rem;
+  }
+
+  .layout-variant-a .photo-frame,
+  .layout-variant-b .photo-frame,
+  .layout-variant-c .photo-frame,
+  .layout-variant-c .photo-frame-tall,
+  .layout-variant-c .photo-frame-square,
+  .layout-variant-d .photo-frame {
+    aspect-ratio: auto !important;
+  }
+
+  .layout-variant-b .photo-block-primary,
+  .layout-variant-b .photo-block-secondary {
+    width: 100% !important;
+    margin-top: 1.5rem !important;
+    margin-left: 0 !important;
+  }
 }
 
 /* Responsive Desktop Enhancements */
