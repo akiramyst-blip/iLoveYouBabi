@@ -281,33 +281,36 @@ body {
    Layout Variants (A, B, C, D)
    ========================================== */
 
-/* Variant A: Full-Screen / Large Portrait Focus */
+/* Variant A: Focus Card + Overlapping Sub-Grid */
 .layout-variant-a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3rem;
+  gap: 1.5rem;
 }
 
 .layout-variant-a .photo-block-main {
   width: 100%;
-  max-width: 600px;
-}
-
-.layout-variant-a .photo-frame {
-  aspect-ratio: 3 / 4;
+  max-width: 580px;
+  position: relative;
+  z-index: 1;
 }
 
 .layout-variant-a .photo-grid-sub {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+  gap: 1.25rem;
   width: 100%;
-  max-width: 600px;
+  max-width: 580px;
+  margin-top: -2.25rem;
+  position: relative;
+  z-index: 2;
 }
 
-.layout-variant-a .photo-grid-sub .photo-frame {
-  aspect-ratio: 4 / 5;
+.layout-variant-a .photo-block-main + .photo-block-main {
+  margin-top: -2.25rem;
+  position: relative;
+  z-index: 3;
 }
 
 /* Variant B: Overlapping Dual Portrait Cards */
@@ -731,43 +734,45 @@ body {
 /* Responsive Mobile Enhancements & Photo Auto-Adjust */
 @media (max-width: 768px) {
   .chapters-container {
-    padding: 2rem 1rem;
-    gap: 4rem;
+    padding: 2rem 0.85rem;
+    gap: 3.5rem;
   }
 
-  .layout-variant-a .photo-frame,
-  .layout-variant-b .photo-frame,
-  .layout-variant-c .photo-frame,
-  .layout-variant-c .photo-frame-tall,
-  .layout-variant-c .photo-frame-square,
-  .layout-variant-d .photo-frame {
-    aspect-ratio: auto !important;
+  .photo-frame img {
+    max-height: 55vh;
   }
 
-  .layout-variant-d .sticky-photo {
-    position: relative !important;
-    top: auto !important;
-    z-index: 1 !important;
+  .layout-variant-a .photo-block-main {
+    width: 82% !important;
+    max-width: 310px !important;
+    margin: 0 auto !important;
+  }
+
+  .layout-variant-a .photo-grid-sub {
+    width: 88% !important;
+    max-width: 340px !important;
+    margin: -1.75rem auto 0 auto !important;
+    gap: 0.75rem !important;
   }
 
   .layout-variant-b .photo-block-primary {
-    width: 85% !important;
+    width: 82% !important;
     margin-left: 0 !important;
     position: relative;
     z-index: 1;
   }
 
   .layout-variant-b .photo-block-secondary {
-    width: 75% !important;
+    width: 72% !important;
     margin-left: auto !important;
-    margin-top: -2rem !important;
+    margin-top: -1.85rem !important;
     position: relative;
     z-index: 2;
   }
 
   .layout-variant-b .photo-block-tertiary {
-    width: 100% !important;
-    margin-top: 1.25rem !important;
+    width: 95% !important;
+    margin: 1rem auto 0 auto !important;
     position: relative;
     z-index: 3;
   }
